@@ -1,0 +1,21 @@
+# Makefile for diffusion_weak (OpenMP, weak-scaling)
+CC = gcc
+CFLAGS = -O3 -g -fopenmp
+LDFLAGS = -fopenmp
+LIBS = -lm
+
+APP = diffusion_weak
+OBJS = $(APP).o
+
+all: $(APP)
+
+$(APP): $(OBJS)
+	$(CC) $(LDFLAGS) $^ -o $@ $(LIBS)
+
+%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -f *.o
+	rm -f $(APP)
+	rm -f *~
